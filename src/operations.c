@@ -6,69 +6,218 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:18:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/08/12 15:42:31 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:56:01 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void push(t_stack *stack, int value)
-{
-    stack->top++;
-    stack->array[stack->top] = value;
+void push(t_stack **dst, t_stack **src)
+{  
+    t_stack *push_node;  
+
+    if (!*src)  
+        return;  
+    push_node = *src;  
+    *src = (*src)->next;  
+    if (*src)  
+        (*src)->prev = NULL;  
+    push_node->prev = NULL;  
+    if (!*dst)  
+    {  
+        *dst = push_node;  
+        push_node->next = NULL;  
+    }  
+    else  
+    {  
+        push_node->next = *dst;  
+        push_node->next->prev = push_node;  
+        *dst = push_node;  
+    }  
 }
 
-/**
- * removes the top element of a stack and return the value
- */
-int pop(t_stack *stack)
-{
-    if (stack->top < 0)
-        return (INT_MIN);
-    return (stack->array[stack->top--]);
-}
+void swap(t_stack **stack)
+{  
+    t_stack *first;
+    t_stack *second;
 
-void swap(t_stack *stack)
-{
-    int temp;
+    if (!stack || !*stack || !(*stack)->next)
+        return;
+    first = *stack;
+    second = first->next;
+    first->next = second->next;
+    if (second->next)
+        second->next->prev = first;
+    second->next = first;
+    second->prev = NULL;
+    first->prev = second;
+    *stack = second; 
+}  
 
-    if (stack->top < 1)
+void rotate(t_stack **stack)
+{  
+    t_stack *first;
+    t_stack *last;
+
+    if (!*stack || !(*stack)->next)  
+        return;  
+    first = *stack;
+    last = *stack;
+    while (last->next)
+        last = last->next;
+    *stack = first->next;  
+    (*stack)->prev = NULL;  
+    last->next = first;     
+    first->next = NULL;
+    first->prev = last; 
+} 
+
+void reverse_rotate(t_stack **stack)
+{  
+    t_stack *last;
+
+    if (!stack || !*stack || !(*stack)->next)
         return ;
-    temp = stack->array[stack->top];
-    stack->array[stack->top] = stack->array[stack->top - 1];
-    stack->array[stack->top - 1] = temp;
+    last = *stack;
+    while (last->next)
+        last = last->next;
+    last->prev->next = NULL;
+    last->next = *stack;
+    last->prev = NULL;
+    (*stack)->prev = last;
+    *stack = last;
 }
 
-void rotate(t_stack *stack)
+/* t_stack *initialize_stack(int count, int values[])
 {
-    int temp;
-    int i;
-
-    if (stack->top < 1)
-        return;
-    temp = stack->array[stack->top];
-    i = stack->top;
-    while (i > 0)
+    t_stack *stack = NULL;
+    t_stack *last = NULL;
+    t_stack *new_node;
+    for (int i = 0; i < count; i++)
     {
-        stack->array[i] = stack->array[i - 1];
-        i--;
+        new_node = (t_stack *)malloc(sizeof(t_stack));
+        if (!new_node)
+            return NULL;
+        new_node->num = values[i];
+        new_node->next = NULL;
+        new_node->prev = last;
+        if (last)
+            last->next = new_node;
+        else
+            stack = new_node;
+        last = new_node;
     }
-    stack->array[0] = temp;
+    return stack;
 }
 
-void reverse_rotate(t_stack *stack)
+// Print the stack
+void print_stack(t_stack *stack)
 {
-    int temp;
-    int i;
-
-    if (stack->top < 1)
-        return;
-    temp = stack->array[0];
-    i = 0;
-    while (i < stack->top)
+    while (stack)
     {
-        stack->array[i] = stack->array[i + 1];
-        i++;
+        printf("Value: %d\n", stack->num);
+        stack = stack->next;
     }
-    stack->array[stack->top] = temp;
+    printf("----\n");
 }
+
+// Main function to test push operation
+void test_push()
+{
+    int values_src[] = {1, 2, 3};
+    int values_dst[] = {4, 5};
+
+    t_stack *src = initialize_stack(3, values_src);
+    t_stack *dst = initialize_stack(2, values_dst);
+
+    printf("Before push:\n");
+    printf("Source stack:\n");
+    print_stack(src);
+    printf("Destination stack:\n");
+    print_stack(dst);
+
+    push(&dst, &src);
+
+    printf("After push:\n");
+    printf("Source stack:\n");
+    print_stack(src);
+    printf("Destination stack:\n");
+    print_stack(dst);
+
+    // Cleanup memory
+    while (src) { t_stack *temp = src; src = src->next; free(temp); }
+    while (dst) { t_stack *temp = dst; dst = dst->next; free(temp); }
+}
+
+// Main function to test swap operation
+void test_swap()
+{
+    int values[] = {1, 2, 3};
+
+    t_stack *stack = initialize_stack(3, values);
+
+    printf("Before swap:\n");
+    print_stack(stack);
+
+    swap(&stack);
+
+    printf("After swap:\n");
+    print_stack(stack);
+
+    // Cleanup memory
+    while (stack) { t_stack *temp = stack; stack = stack->next; free(temp); }
+}
+
+// Main function to test rotate operation
+void test_rotate()
+{
+    int values[] = {1, 2, 3};
+
+    t_stack *stack = initialize_stack(3, values);
+
+    printf("Before rotate:\n");
+    print_stack(stack);
+
+    rotate(&stack);
+
+    printf("After rotate:\n");
+    print_stack(stack);
+
+    // Cleanup memory
+    while (stack) { t_stack *temp = stack; stack = stack->next; free(temp); }
+}
+
+// Main function to test reverse_rotate operation
+void test_reverse_rotate()
+{
+    int values[] = {1, 2, 3};
+
+    t_stack *stack = initialize_stack(3, values);
+
+    printf("Before reverse rotate:\n");
+    print_stack(stack);
+
+    reverse_rotate(&stack);
+
+    printf("After reverse rotate:\n");
+    print_stack(stack);
+
+    // Cleanup memory
+    while (stack) { t_stack *temp = stack; stack = stack->next; free(temp); }
+}
+
+// Main function to run all tests
+int main()
+{
+    printf("Testing push:\n");
+    test_push();
+    printf("Testing swap:\n");
+    test_swap();
+    printf("Testing rotate:\n");
+    test_rotate();
+    printf("Testing reverse rotate:\n");
+    test_reverse_rotate();
+
+    return 0;
+} */
+

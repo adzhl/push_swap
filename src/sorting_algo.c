@@ -6,43 +6,17 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:42:08 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/08/12 22:02:51 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/08/14 22:26:38 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void sort_three(t_stack *a)
-{
-    int top;
-    int middle;
-    int bottom;
-
-    top = a->array[a->top];
-    middle = a->array[a->top - 1];
-    bottom = a->array[a->top - 2];
-    if (a->top < 2)
-        return;
-    if (top > middle && top > bottom)
-    {
-        rotate_a(a);
-        if (top > middle)
-            swap_a(a);
-    }
-    else if (top > middle)
-        swap_a(a);
-    else if (middle > bottom)
-    {
-        rr_a(a);
-        if (top > middle)
-            swap_a(a);
-    }
-}
-
 void push_min_to_b(t_stack *a, t_stack *b)  
 {  
-    int min;
-    
+     int min;
+
+    (void)b;
     min = get_min(a);  
     while (a->array[a->top] != min)  
     {  
@@ -59,10 +33,81 @@ void sort_small(t_stack *a, t_stack *b)
         push_min_to_b(a, b);  
     sort_three(a);  
     while (b->top >= 0)  
-        push_a(a, b); 
+        push_a(a, b);
 }
 
-void turk_sort_part(t_stack *a, int gap, int i)
+int get_median(t_stack *s, int size)  
+{  
+    int *temp = malloc(sizeof(int) * size);  
+    for (int i = 0; i < size; i++)  
+        temp[i] = s->array[s->top - i];  
+    
+    // Simple bubble sort to find median  
+    for (int i = 0; i < size - 1; i++)  
+        for (int j = 0; j < size - i - 1; j++)  
+            if (temp[j] > temp[j + 1])  
+            {  
+                int t = temp[j];  
+                temp[j] = temp[j + 1];  
+                temp[j + 1] = t;  
+            }  
+    
+    int median = temp[size / 2];  
+    free(temp);  
+    return median;  
+}  
+
+void quicksort(t_stack *a, t_stack *b, int size)  
+{  
+    if (size <= 3)  
+    {  
+        if (size == 3)  
+        {  
+            sort_three(a);  
+        }  
+        else if (size == 2 && a->array[a->top] > a->array[a->top - 1])  
+        {  
+            swap_a(a);  
+        }  
+        return;  
+    }  
+
+    int pivot = a->array[a->top - size / 2];  // Choose middle element as pivot  
+    int i = 0;  
+    int pushed = 0;  
+
+    while (i < size)  
+    {  
+        if (a->array[a->top] < pivot)  
+        {  
+            push_b(a, b);  
+            pushed++;  
+        }  
+        else  
+        {  
+            rotate_a(a);  
+        }  
+        i++;  
+    }  
+
+    // Undo rotations  
+    for (int j = 0; j < size - pushed; j++)  
+    {  
+        rr_a(a);  
+    }  
+
+    // Recursively sort the partitions  
+    quicksort(a, b, size - pushed);  
+    
+    // Move elements back to A and sort  
+    for (int j = 0; j < pushed; j++)  
+    {  
+        push_a(a, b);  
+    }  
+    quicksort(a, b, pushed);  
+} 
+
+/* void turk_sort_part(t_stack *a, int gap, int i)
 {
     int j;
     int k;
@@ -110,4 +155,4 @@ void turk_sort(t_stack *a, t_stack *b)
         }
     }
     (void)b;
-}
+} */
