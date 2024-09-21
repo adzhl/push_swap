@@ -6,76 +6,97 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:42:39 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/08/15 18:02:18 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:16:35 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static int valid_int(char *str)
+static int	valid_int(char *str)
 {
-    if (*str == '-' || *str == '+')
-        str++;
-    if (*str == '\0')
-        return (0);
-    if (*str == '0' && *(str + 1) != '\0')
-        return (0);
-    while (*str)
-    {
-        if (!ft_isdigit(*str))
-            return (0);
-        str++;
-    }
-    return (1);
+	int	has_digits;
+
+	has_digits = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	if (*str == '\0')
+		return (0);
+	while (*str == '0')
+		str++;
+	if (*str == '\0')
+		return (1);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		has_digits = 1;
+		str++;
+	}
+	return (has_digits);
 }
 
-static int check_dup(int *num, int count, int value)
+static int	check_dup(t_stack *stack, int value)
 {
-    int i;
+	t_stack	*current;
 
-    i = 0;
-    while (i < count)
-    {
-        if (num[i] == value)
-            return (1);
-        i++;
-    }
-    return (0);
+	if (!stack)
+		return (0);
+	current = stack;
+	while (current)
+	{
+		if (current->num == value)
+			return (1);
+		current = current->next;
+	}
+	return (0);
 }
 
-int valid_input(int argc, char **argv)
+static int	free_and_return(t_stack *stack)
 {
-    int i;
-    long nbr;
-    int num[argc - 1];
-    int num_count;
+	t_stack	*temp;
 
-    num_count = 0;
-    i = 1;
-    while (i < argc)
-    {
-        if (!valid_int(argv[i]))
-            return (0);
-        nbr = ft_atol(argv[i]);
-        if (nbr > INT_MAX || nbr < INT_MIN)
-            return (0);
-        if (check_dup(num, num_count, (int)nbr))
-            return (0);
-        num[num_count++] = (int)nbr;
-        i++;
-    }
-    return (1);
+	while (stack)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
+	handle_error(NULL, NULL, NULL);
+	return (0);
 }
 
-/* int main(int argc, char **argv)
+int	valid_input(int argc, char **argv, t_stack **a)
 {
-    // Test cases
-    int result = valid_input(argc, argv);
+	int		i;
+	long	nbr;
 
-    if (result)
-        printf("Valid input.\n");
-    else
-        printf("Invalid input.\n");
+	i = 0;
+	while (i < argc)
+	{
+		if (argv[i][0] == '\0')
+			return (free_and_return(*a));
+		if (!valid_int(argv[i]))
+			return (free_and_return(*a));
+		nbr = ft_atol(argv[i]);
+		if (nbr > INT_MAX || nbr < INT_MIN)
+			return (free_and_return(*a));
+		if (check_dup(*a, (int)nbr))
+			return (free_and_return(*a));
+		append_node(a, (int)nbr);
+		i++;
+	}
+	return (1);
+}
 
-    return 0;
+/* int	main(int argc, char **argv)
+{
+	int	result;
+
+	// Test cases
+	result = valid_input(argc, argv);
+	if (result)
+		printf("Valid input.\n");
+	else
+		printf("Invalid input.\n");
+	return (0);
 } */

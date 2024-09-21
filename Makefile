@@ -5,10 +5,10 @@ CFLAGS = -Wall -Wextra -Werror -I./include -I./libft
 
 LIBFT = libft/libft.a
 
-SRCS = src/main.c src/operations.c src/find_cheapest.c src/push_swap.c \
-		src/rotate_reverse.c src/sort_stack.c src/sort_three.c \
-		src/utils.c src/ft_atol.c src/valid_input.c src/handle_str.c\
-		src/initialize_stack.c src/handle_error.c\
+SRCS =  src/main.c src/find_cost.c src/find_target.c src/ft_atol.c src/handle_error.c src/handle_str.c \
+		src/initialize_stack.c src/operations.c src/push_swap.c \
+		src/rotate.c src/reverse_rotate.c src/sort_three.c src/sort_small.c src/sort_big.c \
+		src/utils.c src/valid_input.c src/sort_big_utils.c\
 
 OBJ_DIR = obj
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

@@ -6,84 +6,99 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:01:29 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/08/15 18:10:36 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:15:12 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-t_stack *initialize_stack(int argc, char **argv, t_stack **a)
+// find last node
+static t_stack	*last_node(t_stack *stack)
 {
-    int i;
-    int num;
-    t_stack *new_node;
-    t_stack *last;
-
-    i = 1;
-    *a = NULL;
-    last = NULL;
-    while (i < argc)
-    {
-        num = ft_atoi(argv[i]);
-        new_node = malloc(sizeof(t_stack));
-        if (!new_node)
-            return (NULL);
-        new_node->num = num;
-        new_node->index = i - 1;
-        new_node->above_median = 0;
-        new_node->size = argc - 1;
-        new_node->target = NULL;
-        new_node->next = NULL;
-        new_node->prev = last;
-        if (last)
-            last->next = new_node;
-        else
-            *a = new_node;
-        last = new_node;
-        i++;
-    }
-    return (*a);
+	if (!stack)
+		return (NULL);
+	while (stack->next != NULL)
+		stack = stack->next;
+	return (stack);
 }
 
-/* // Print the stack to verify the initialization
-void print_stack(t_stack *stack)
+// create new node
+static t_stack	*create_node(int n)
 {
-    while (stack)
-    {
-        printf("Value: %d, Index: %d, Size: %d\n", stack->num, stack->index, stack->size);
-        stack = stack->next;
-    }
+	t_stack	*new_node;
+
+	new_node = malloc(sizeof(t_stack));
+	if (!new_node)
+		return (NULL);
+	new_node->num = n;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-int main(int argc, char **argv)
+void	append_node(t_stack **stack, int num)
 {
-    t_stack *stack = NULL;
+	t_stack	*last;
+	t_stack	*new;
 
-    if (argc < 2)
-    {
-        printf("Usage: %s num1 num2 ...\n", argv[0]);
-        return 1;
-    }
+	new = create_node(num);
+	if (!stack || !new)
+		return ;
+	if (*stack == NULL)
+	{
+		*stack = new;
+		new->prev = NULL;
+	}
+	else
+	{
+		last = last_node(*stack);
+		last->next = new;
+		new->prev = last;
+	}
+}
 
-    stack = initialize_stack(argc, argv, &stack);
+/* void	initialize_stack(char **argv, t_stack **a)
+{
+	int	i;
+	int	num;
 
-    if (!stack)
-    {
-        fprintf(stderr, "Failed to initialize stack.\n");
-        return 1;
-    }
-
-    print_stack(stack);
-
-    // Free the stack to avoid memory leaks
-    t_stack *temp;
-    while (stack)
-    {
-        temp = stack;
-        stack = stack->next;
-        free(temp);
-    }
-
-    return 0;
+	i = 0;
+	while (argv[i])
+	{
+		num = ft_atoi(argv[i]);
+		append_node(a, (int)num);
+		i++;
+	}
 } */
+/* void print_stack(t_stack *stack)
+{
+	while (stack)
+	{
+		printf("%d ", stack->num);
+		stack = stack->next;
+	}
+	printf("\n");
+}
 
+// Main function to test the stack operations
+int	main(int argc, char **argv)
+{
+	(void)argc;
+	t_stack *stack = NULL;
+
+	// Initialize the stack with values from command-line arguments
+	initialize_stack(argv + 1, &stack); // Skip the program name
+
+	// Print the stack to verify it contains the expected values
+	print_stack(stack);
+
+	// Free the stack nodes
+	t_stack *tmp;
+	while (stack)
+	{
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
+	}
+
+	return (0);
+} */

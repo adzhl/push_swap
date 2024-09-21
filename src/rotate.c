@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 15:46:49 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/10 08:46:37 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/09/13 09:27:33 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/13 13:49:27 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push_a(t_stack **a, t_stack **b)
+void	rotate_a(t_stack **a)
 {
-	push(a, b);
-	write(1, "pa\n", 3);
+	rotate(a);
+	write(1, "ra\n", 3);
 }
 
-void	push_b(t_stack **a, t_stack **b)
+void	rotate_b(t_stack **b)
 {
-	push(b, a);
-	write(1, "pb\n", 3);
+	rotate(b);
+	write(1, "rb\n", 3);
 }
 
-void	swap_a(t_stack **a)
+void	rotate_ab(t_stack **a, t_stack **b)
 {
-	swap(a);
-	write(1, "sa\n", 3);
-}
-
-void	swap_b(t_stack **b)
-{
-	swap(b);
-	write(1, "sb\n", 3);
+	rotate(a);
+	rotate(b);
+	write(1, "rr\n", 3);
 }
