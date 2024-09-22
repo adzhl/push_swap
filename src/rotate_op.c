@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   rotate_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 17:03:29 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/06/13 12:27:53 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/09/13 09:27:33 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/22 17:47:54 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/push_swap.h"
 
-/**
- * @brief The isprint() function tests for any printing character,
- * including space.
- * @return The isprint() function returns zero if the character tests
- * false and returns non-zero if the character tests true.
- */
-int	ft_isprint(int c)
+void	ra(t_stack **a)
 {
-	if (c < 32 || c > 126)
-		return (0);
-	else
-		return (1);
+	rotate(a);
+	write(1, "ra\n", 3);
+}
+
+void	rb(t_stack **b)
+{
+	rotate(b);
+	write(1, "rb\n", 3);
+}
+
+void	rr(t_stack **a, t_stack **b)
+{
+	rotate(a);
+	rotate(b);
+	write(1, "rr\n", 3);
 }

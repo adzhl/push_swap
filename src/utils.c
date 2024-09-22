@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 16:05:48 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/19 09:55:40 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/22 13:45:05 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void current_index(t_stack **stack)
     }
 }
 
-// Helper function to find the smallest element in the stack
 t_stack	*find_smallest(t_stack *stack)
 {
 	t_stack	*smallest;
@@ -73,7 +72,6 @@ t_stack	*find_smallest(t_stack *stack)
 	return (smallest);
 }
 
-// Helper function to find the largest element in the stack
 t_stack	*find_largest(t_stack *stack)
 {
 	t_stack	*largest;

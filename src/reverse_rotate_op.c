@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   reverse_rotate_op.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 15:02:38 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/06/13 13:19:19 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/08/12 15:52:03 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/22 17:48:02 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/push_swap.h"
 
-/**
- * @brief Outputs the string ’s’ to the given file descriptor.
- */
-void	ft_putstr_fd(char *s, int fd)
+void	rra(t_stack **a)
 {
-	if (s == NULL)
-		return ;
-	while (*s != '\0')
-	{
-		write(fd, s, 1);
-		s++;
-	}
+	reverse_rotate(a);
+	write(1, "rra\n", 4);
 }
 
-/* int	main(void)
+void	rrb(t_stack **b)
 {
-	char s[] = "Hello, World!";
+	reverse_rotate(b);
+	write(1, "rrb\n", 4);
+}
 
-	ft_putstr_fd(s, 1);
-	return (0);
-} */
+void	rrr(t_stack **a, t_stack **b)
+{
+	reverse_rotate(a);
+	reverse_rotate(b);
+	write(1, "rrr\n", 4);
+}

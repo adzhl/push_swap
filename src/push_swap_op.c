@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   push_swap_op.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 15:15:02 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/06/13 13:18:36 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/08/12 15:46:49 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/22 17:47:33 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/push_swap.h"
 
-/**
- * @brief Outputs the string ’s’ to the given file descriptor followed by 
- * a newline.
- */
-void	ft_putendl_fd(char *s, int fd)
+void	pa(t_stack **a, t_stack **b)
 {
-	if (s == NULL)
-		return ;
-	while (*s != '\0')
-	{
-		write(fd, s, 1);
-		s++;
-	}
-	write(fd, "\n", 1);
+	push(a, b);
+	write(1, "pa\n", 3);
 }
 
-/* int	main(void)
+void	pb(t_stack **a, t_stack **b)
 {
-	char s[] = "Hello, World!";
+	push(b, a);
+	write(1, "pb\n", 3);
+}
 
-	ft_putendl_fd(s, 1);
-	return (0);
-} */
+void	sa(t_stack **a)
+{
+	swap(a);
+	write(1, "sa\n", 3);
+}
+
+void	sb(t_stack **b)
+{
+	swap(b);
+	write(1, "sb\n", 3);
+}
