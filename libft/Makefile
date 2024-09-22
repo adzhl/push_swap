@@ -6,7 +6,7 @@
 #    By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 11:34:17 by abinti-a          #+#    #+#              #
-#    Updated: 2024/09/22 17:41:25 by abinti-a         ###   ########.fr        #
+#    Updated: 2024/09/22 19:48:57 by abinti-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,6 @@ SRCS =  ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-		ft_lstmap.c \
-
-BONUS_OBJS = $(BONUS:.c=.o)
-
 all: $(NAME)
 
 $(NAME) : $(OBJS)
@@ -58,7 +52,4 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY : all clean fclean re bonus
+.PHONY : all clean fclean re 
