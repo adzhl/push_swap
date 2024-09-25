@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 17:45:12 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/23 07:29:06 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/09/23 09:52:08 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/24 10:17:55 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#ifndef CHECKER_H
+# define CHECKER_H
 
-long	ft_atol(const char *str)
-{
-	int		negative;
-	long	result;
+# include "../libft/get_next_line.h"
+# include "push_swap.h"
 
-	negative = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-')
-	{
-		negative = negative * -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return (result * negative);
-}
+// utils
+void	execute_instruction(t_stack **a, t_stack **b, char *instruction);
+void	process_instructions(t_stack **a, t_stack **b);
+
+#endif

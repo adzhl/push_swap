@@ -6,27 +6,30 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:52:03 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 17:48:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:17:59 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	rra(t_stack **a)
+void	rra(t_stack **a, int print)
 {
 	reverse_rotate(a);
-	write(1, "rra\n", 4);
+	if (print)
+		write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack **b)
+void	rrb(t_stack **b, int print)
 {
 	reverse_rotate(b);
-	write(1, "rrb\n", 4);
+	if (print)
+		write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack **a, t_stack **b)
+void	rrr(t_stack **a, t_stack **b, int print)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
-	write(1, "rrr\n", 4);
+	if (print)
+		write(1, "rrr\n", 4);
 }

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 17:45:12 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/23 07:29:06 by abinti-a         ###   ########.fr       */
+/*   Created: 2024/09/23 07:41:43 by abinti-a          #+#    #+#             */
+/*   Updated: 2024/09/24 12:12:40 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/checker.h"
 
-long	ft_atol(const char *str)
+int	main(int argc, char **argv)
 {
-	int		negative;
-	long	result;
+	t_stack	*a;
+	t_stack	*b;
+	char	**split_args;
+	int		new_argc;
 
-	negative = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-')
-	{
-		negative = negative * -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return (result * negative);
+	a = NULL;
+	b = NULL;
+	split_args = process_arguments(&argc, &argv, &new_argc);
+	if (!split_args && argc < 2)
+		return (0);
+	if (!valid_input(new_argc, argv, &a))
+		handle_error(a, b, split_args);
+	process_instructions(&a, &b);
+	cleanup(a, b, split_args);
+	return (0);
 }

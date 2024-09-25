@@ -6,13 +6,13 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:42:39 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 18:23:40 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/25 08:52:56 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static int	valid_int(char *str)
+int	valid_int(char *str)
 {
 	int	has_digits;
 
@@ -66,7 +66,7 @@ int	valid_input(int argc, char **argv, t_stack **a)
 	i = 0;
 	while (i < argc)
 	{
-		if (argv[i][0] == '\0' || !valid_int(argv[i]))
+		if (!valid_int(argv[i]))
 			return (free_and_return(*a));
 		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)

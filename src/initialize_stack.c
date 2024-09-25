@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:01:29 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 18:44:09 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/23 07:29:36 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ void	append_node(t_stack **stack, int num)
 		new->prev = last;
 	}
 }
-

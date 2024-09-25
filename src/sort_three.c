@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:58:48 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 17:49:33 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:20:09 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@ static void	case1(t_stack **a, int middle, int bottom)
 {
 	if (middle > bottom)
 	{
-		ra(a);
-		sa(a);
+		ra(a, 1);
+		sa(a, 1);
 	}
 	else
-		ra(a);
+		ra(a, 1);
 }
 
 static void	case2(t_stack **a, int top, int bottom)
 {
 	if (top > bottom)
-		rra(a);
+		rra(a, 1);
 	else
 	{
-		rra(a);
-		sa(a);
+		rra(a, 1);
+		sa(a, 1);
 	}
 }
 
 static void	case3(t_stack **a, int top, int middle)
 {
 	if (top > middle)
-		sa(a);
+		sa(a, 1);
 }
 
 void	sort_three(t_stack **a)

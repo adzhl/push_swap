@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:18:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 13:45:53 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:13:40 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,22 @@ void	rotate(t_stack **stack)
 	first->prev = last;
 }
 
-void reverse_rotate(t_stack **stack)
+void	reverse_rotate(t_stack **stack)
 {
-    t_stack *last;
-    t_stack *second_last;
+	t_stack	*last;
+	t_stack	*second_last;
 
-    if (!stack || !*stack || !(*stack)->next)
-        return;
-    last = *stack;
-    while (last->next)
-    {
-        second_last = last;
-        last = last->next;
-    }
-    second_last->next = NULL;
-    last->next = *stack;
-    last->prev = NULL;
-    (*stack)->prev = last;
-    *stack = last;
+	if (!stack || !*stack || !(*stack)->next)
+		return ;
+	last = *stack;
+	while (last->next)
+	{
+		second_last = last;
+		last = last->next;
+	}
+	second_last->next = NULL;
+	last->next = *stack;
+	last->prev = NULL;
+	(*stack)->prev = last;
+	*stack = last;
 }
-

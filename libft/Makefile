@@ -6,7 +6,7 @@
 #    By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 11:34:17 by abinti-a          #+#    #+#              #
-#    Updated: 2024/09/22 19:48:57 by abinti-a         ###   ########.fr        #
+#    Updated: 2024/09/24 12:29:50 by abinti-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,24 +15,19 @@ NAME = libft.a
 
 # Compiler and Compiler Flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./
+CFLAGS = -Wall -Wextra -Werror -I./ #-fsanitize=address -g3
 
 # Source files and object
-SRCS =  ft_atoi.c \
-		ft_isdigit.c \
-		ft_split.c \
-		ft_strlen.c \
-		ft_strchr.c \
-		ft_strlcpy.c \
-		ft_strlcat.c \
-		ft_strrchr.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strdup.c \
-		ft_substr.c \
-		ft_strjoin.c \
-		ft_strtrim.c \
-		get_next_line.c \
+SRCS = ft_isdigit.c \
+	  ft_strncmp.c \
+	  ft_split.c \
+	  ft_atoi.c \
+	  ft_substr.c \
+	  ft_strlcpy.c \
+	  ft_strlen.c \
+	  ft_strdup.c \
+	  ft_strjoin.c \
+	  get_next_line.c \
 
 OBJS = $(SRCS:.c=.o)
 

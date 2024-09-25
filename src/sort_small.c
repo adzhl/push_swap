@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:25:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/22 18:28:52 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:20:51 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,34 @@ static void	bring_to_top(t_stack **stack, t_stack *target)
 	if (i <= size / 2)
 	{
 		while (*stack != target)
-			ra(stack);
+			ra(stack, 1);
 	}
 	else
 	{
 		while (*stack != target)
-			rra(stack);
+			rra(stack, 1);
 	}
 }
 
 void	sort_small(t_stack **a, t_stack **b)
 {
 	t_stack	*smallest;
-	t_stack *largest;
-	int size;
+	t_stack	*largest;
+	int		size;
 
 	size = stack_size(*a);
 	largest = find_largest(*a);
 	bring_to_top(a, largest);
-	pb(a, b);
+	pb(a, b, 1);
 	if (size == 5)
 	{
 		smallest = find_smallest(*a);
 		bring_to_top(a, smallest);
-		pb(a, b);
+		pb(a, b, 1);
 	}
 	sort_three(a);
-	pa(a, b);
+	pa(a, b, 1);
 	if (size == 5)
-		pa(a, b);
-	ra(a);
+		pa(a, b, 1);
+	ra(a, 1);
 }
