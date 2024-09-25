@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:00:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2024/09/24 12:07:09 by abinti-a         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:55:43 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ char				**handle_str(char *arg, int *argc);
 
 // valid input
 int					valid_int(char *str);
-// int					check_dup(t_stack *stack, int value);
-// int	free_and_return(t_stack *stack);
 int					valid_input(int argc, char **argv, t_stack **a);
 
 // initialization
