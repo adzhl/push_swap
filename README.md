@@ -7,8 +7,9 @@ The push_swap project is a sorting algorithm challenge where you must sort a sta
 
 ### The Rules
 1. You have two stacks: `a` and `b`.
-  - Stack `a`: Contains a random list of integers (positive and/or negative) at the start, with no duplicates.
-  - Stack `b`: Starts empty.
+    - Stack `a`: Contains a random list of integers (positive and/or negative) at the start, with no duplicates.
+    - Stack `b`: Starts empty.
+
 2. The goal is to sort stack `a` in ascending order, using the following operations:
 
 ### Operations
@@ -41,26 +42,32 @@ The push_swap project is a sorting algorithm challenge where you must sort a sta
 My `push_swap` program implements multiple sorting strategies to efficiently handle stacks of varying sizes. Each strategy is tailored to the size of the input, ensuring an optimal balance between simplicity and performance.
 
 ### **Sorting Strategies**
-1. Sort 3 (3 Elements)
+#### 1. Sort 3 (3 Elements)
+   
 - For stacks with exactly 3 elements:
+  
     - The program uses a minimal number of operations (`sa`, `ra`, or `rra`) to sort the stack.
     - It checks for specific patterns and applies the necessary swaps and rotations to achieve the correct order.
       
-2. Sort Small (5 Elements)
+#### 2. Sort Small (5 Elements)
+
 - For stacks with 5 or fewer elements:
-    - The program pushes the largest and smallest elements to stack b.
+  
+    - The program pushes the largest and smallest elements to stack `b`.
     - The remaining three elements in stack `a` are sorted using the `sort 3` method.
-    - The two smallest elements are then pushed back from stack `b` to their correct positions in stack `a` and rotated if needed.
+    - The two elements are then pushed back from stack `b` to their correct positions in stack `a` and rotated.
       
-3. Sort Big (More than 5 Elements)
-- For stacks larger than 5 elements, the program implements a two-step algorithm to efficiently sort the stacks ([See below](#sort-big-algorithm))
+#### 3. Sort Big (More than 5 Elements)
+
+- For stacks larger than 5 elements, the program implements a two-step algorithm to efficiently sort the stacks (See below)
 
 ---
 
 ##  🗂️ Sort Big Algorithm
 ### **Step 1: Sorting by Mean Value**
 
-**Initial Split:**
+#### Initial Split:
+
 - The mean (average) value of all numbers in stack `a` is calculated.
 - Numbers less than the mean value are pushed to stack `b`.
 - This step reduces the size of stack `a` and ensures smaller values are handled separately, simplifying the sorting process.
@@ -68,7 +75,8 @@ My `push_swap` program implements multiple sorting strategies to efficiently han
   
 ### **Step 2: Sorting Stack b and Merging Back**
 
-**Targeting the Closest Larger Value:**
+#### Targeting the Closest Larger Value:
+
 - For each number in stack `b`, the program identifies the closest larger number in stack `a` as its target.
 - The stacks are rotated or reverse-rotated to align the elements for efficient merging.
 - The number from stack `b` is pushed back to stack `a` in its correct position.
