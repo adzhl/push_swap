@@ -60,6 +60,14 @@ My `push_swap` program implements multiple sorting strategies to efficiently han
 #### 3. Sort Big (More than 5 Elements)
 
 - For stacks larger than 5 elements, the program implements a two-step algorithm to efficiently sort the stacks (See below)
+  
+> [!NOTE]
+> My program is able to sort:
+> - `100` numbers in less than `700` operations
+> - `500` numbers in less than `5000` operations
+
+> [!WARNING]
+> Sorting 500 numbers does not work on Linux (To be fixed)
 
 ---
 
